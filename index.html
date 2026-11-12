@@ -1,39 +1,870 @@
-# Privacy Policy for Blueprint Notes (English - Master)
-**Last updated:** November 6, 2026  
-**Hosted at:** https://bazsonagy.github.io/blueprintnote/
-Blueprint Notes is an architectural notebook atelier engineered for iOS, iPadOS, and macOS. This Privacy Policy describes how your information is handled when using Blueprint Notes. We operate on a zero-knowledge, hardware-isolated architecture: we do not maintain a user account system, and we do not operate servers that read, store, transmit, or monetize your notes.
-### 1. What Stays on Your Device & In Your Private iCloud
-- **Local Storage**: Notes, handwritten canvas strokes, photographs, audio recordings, hashtags, and organizer blocks are stored securely in local app storage on your device.
-- **Apple iCloud (CloudKit) Sync**: When signed in to your Apple ID with iCloud enabled, Blueprint Notes syncs through Apple's CloudKit private database. That data is tied to your personal Apple ID and encrypted by Apple. We have zero access to your private database or its contents.
-- **Shared Notes**: If you explicitly share a note via Apple’s native iCloud sharing tools, Apple manages the transmission directly with the recipients you invite. We do not intermediate or log that exchange.
-### 2. 100% On-Device Artificial Intelligence
-Blueprint Notes features integrated local artificial intelligence (such as Qwen 2.5 and Llama 3.2 architectures) running directly on Apple Silicon:
-- **Local Processing**: AI features—including Meeting Digest synthesis, SWOT Analysis extraction, Chronology sequencing, and text restructuring—execute 100% offline within your device's memory.
-- **No Cloud Inference**: No prompts, note selections, or generated text are transmitted across the internet to OpenAI, Anthropic, Google, or developer servers.
-- **Model Training**: Your content is never collected, stored, or utilized to train or fine-tune artificial intelligence models.
-### 3. Document Scanner & Audio Memos
-- **Camera & Document Scanner**: Used strictly to capture physical documents, sketches, or receipts directly into a note. Optical Character Recognition (OCR) and text cleaning run entirely on-device using Apple's Vision framework and local neural models.
-- **Microphone & Voice Recordings**: Audio recordings are saved in the app's sandboxed storage. Speech recognition operates on-device using Apple's system speech frameworks; no audio data is sent to external speech servers.
-### 4. Permissions (Granted Only on Demand)
-The app requests system permissions only when you explicitly invoke a feature:
-- **Camera**: Attach photographs or scan documents into a note.
-- **Microphone**: Record voice memos into an audio card.
-- **Speech Recognition**: Transcribe recorded audio on-device.
-- **Photo Library**: Select and attach images from your Photos library.
-- **Contacts (Optional)**: If you add a Contact organizer, you may pick a contact to store their name, phone, or email within that specific note.
-- **Location (Optional)**: If you add a Place organizer, you may select a location to display a map pin.
-You can revoke permissions at any time in iOS/iPadOS/macOS System Settings.
-### 5. In-App Purchases (StoreKit 2)
-In-App Purchases (such as Unlimited Notes, Color Packs, and Organizer Bundles) are processed directly by Apple through StoreKit. We do not receive, store, or process your credit card numbers or billing addresses. Purchase entitlements are cryptographically verified on-device via Apple StoreKit receipts.
-### 6. What We Do Not Collect
-- We do not use third-party analytics (e.g., Firebase, Google Analytics, Mixpanel, AppsFlyer).
-- We do not use advertising networks (e.g., AdMob, AppLovin).
-- We do not track you across other apps or websites (ATT tracking is not used).
-- We do not collect device identifiers (IDFA, IDFV) for profiling.
-### 7. Children's Privacy
-Blueprint Notes is not directed to children under 13, and we do not knowingly collect personal information from children.
-### 8. Contact
-- **Developer:** Balazs Nagy
-- **Email:** bncdgames@gmail.com
-- **Website:** https://bazsonagy.github.io/blueprintnote/
-- **Location:** Budapest, Hungary
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy · Blueprint Notes</title>
+  <meta name="description" content="Privacy Policy for Blueprint Notes. Zero-knowledge, hardware-isolated architecture with 100% on-device AI and private iCloud sync.">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    :root {
+      --bg-body: #0d1527;
+      --bg-card: #152238;
+      --bg-card-subtle: #1c2b46;
+      --border: rgba(148, 163, 184, 0.16);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #38bdf8;
+      --accent-cyan-bg: rgba(56, 189, 248, 0.12);
+      --accent-emerald: #34d399;
+      --accent-emerald-bg: rgba(52, 211, 153, 0.12);
+      --accent-amber: #fbbf24;
+      --grid-line: rgba(56, 189, 248, 0.04);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-card-subtle: #f1f5f9;
+        --border: rgba(100, 116, 139, 0.18);
+        --border-accent: rgba(2, 132, 199, 0.35);
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --text-dim: #94a3b8;
+        --accent-cyan: #0284c7;
+        --accent-cyan-bg: rgba(2, 132, 199, 0.08);
+        --accent-emerald: #059669;
+        --accent-emerald-bg: rgba(5, 150, 105, 0.08);
+        --accent-amber: #d97706;
+        --grid-line: rgba(2, 132, 199, 0.035);
+        --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+        --shadow-md: 0 8px 30px rgba(15, 23, 42, 0.08);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header & Branding */
+    header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: var(--accent-cyan-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: 9999px;
+      color: var(--accent-cyan);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .brand-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    h1.brand-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text-main) 60%, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Language Switcher Bar */
+    .language-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      padding: 0.5rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .lang-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 0.55rem 0.95rem;
+      border-radius: 9px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-card-subtle);
+    }
+
+    .lang-btn.active {
+      background: var(--accent-cyan-bg);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      border: 1px solid var(--border-accent);
+    }
+
+    /* Quick Feature Highlights Card */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent-cyan);
+    }
+
+    .highlight-icon {
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .highlight-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Main Policy Card */
+    .policy-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2.75rem);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2.5rem;
+    }
+
+    .policy-content {
+      display: none;
+    }
+
+    .policy-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Policy Typography */
+    .policy-content h2.policy-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+    }
+
+    .policy-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lead-paragraph {
+      font-size: 1.05rem;
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      padding: 1.15rem 1.35rem;
+      background: var(--bg-card-subtle);
+      border-left: 3px solid var(--accent-emerald);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .policy-content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .policy-content p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 0.96rem;
+    }
+
+    .policy-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .policy-content li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.65rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .policy-content li::before {
+      content: "•";
+      color: var(--accent-cyan);
+      font-weight: bold;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 0.35rem;
+      top: -2px;
+    }
+
+    .policy-content strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Contact Block */
+    .contact-box {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .contact-box h4 {
+      font-size: 1rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-item {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-item a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding: 1.5rem 0;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-divider {
+      margin: 0 0.5rem;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+        padding: 0;
+      }
+      .language-nav, .highlights-grid, footer {
+        display: none !important;
+      }
+      .policy-wrapper {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+      }
+      .policy-content {
+        display: block !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand-badge">Hardware-Isolated · Zero Knowledge Architecture</div>
+    <h1 class="brand-title">Blueprint Notes</h1>
+    <p class="brand-subtitle">Official Multi-Language Privacy Policy & Data Architecture Documentation</p>
+  </header>
+
+  <!-- Language Switcher Bar -->
+  <nav class="language-nav" aria-label="Choose language">
+    <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">🇬🇧 English</button>
+    <button class="lang-btn" data-lang="hu" onclick="setLanguage('hu')">🇭🇺 Magyar</button>
+    <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">🇩🇪 Deutsch</button>
+    <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 Français</button>
+    <button class="lang-btn" data-lang="es" onclick="setLanguage('es')">🇪🇸 Español</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+  </nav>
+
+  <!-- Quick Feature Highlights -->
+  <section class="highlights-grid">
+    <div class="highlight-card">
+      <div class="highlight-icon">🔒</div>
+      <div class="highlight-title">100% On-Device AI</div>
+      <div class="highlight-desc">All Small Language Models execute in memory directly on Apple Silicon. Zero prompts or notes touch remote servers.</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">🛡️</div>
+      <div class="highlight-title">Data Not Collected</div>
+      <div class="highlight-desc">No tracking pixels, zero analytics SDKs (no Firebase, no Mixpanel), and no advertising networks.</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">☁️</div>
+      <div class="highlight-title">Private iCloud Sync</div>
+      <div class="highlight-desc">Syncs exclusively through your private Apple CloudKit container. The developer cannot view or access your notes.</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">💳</div>
+      <div class="highlight-title">Apple StoreKit 2</div>
+      <div class="highlight-desc">All in-app purchases are handled by Apple. No financial credentials or billing data are handled by the app.</div>
+    </div>
+  </section>
+
+  <!-- Policy Wrapper -->
+  <main class="policy-wrapper">
+
+    <!-- ======================================================== -->
+    <!-- 1. ENGLISH (MASTER)                                      -->
+    <!-- ======================================================== -->
+    <article id="policy-en" class="policy-content active" lang="en">
+      <h2 class="policy-heading">Privacy Policy for Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>Last updated:</strong> November 6, 2026</span>
+        <span>🌐 <strong>URL:</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>Territory:</strong> Global (English Master)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        Blueprint Notes is an architectural notebook atelier engineered for iOS, iPadOS, and macOS. This Privacy Policy describes how your information is handled when using Blueprint Notes. We operate on a zero-knowledge, hardware-isolated architecture: we do not maintain a user account system, and we do not operate servers that read, store, transmit, or monetize your notes.
+      </div>
+
+      <h3>1. What Stays on Your Device &amp; In Your Private iCloud</h3>
+      <ul>
+        <li><strong>Local Storage:</strong> Notes, handwritten canvas strokes, photographs, audio recordings, hashtags, and organizer blocks are stored securely in local app sandbox storage on your device.</li>
+        <li><strong>Apple iCloud (CloudKit) Sync:</strong> When signed in to your Apple ID with iCloud enabled, Blueprint Notes syncs through Apple's CloudKit private database. That data is tied to your personal Apple ID and encrypted by Apple. We have zero access to your private database or its contents.</li>
+        <li><strong>Shared Notes:</strong> If you explicitly share a note via Apple’s native iCloud sharing tools, Apple manages the transmission directly with the recipients you invite. We do not intermediate or log that exchange.</li>
+      </ul>
+
+      <h3>2. 100% On-Device Artificial Intelligence</h3>
+      <p>Blueprint Notes features integrated local artificial intelligence (such as Qwen 2.5 and Llama 3.2 architectures) running directly on Apple Silicon:</p>
+      <ul>
+        <li><strong>Local Processing:</strong> AI features—including Meeting Digest synthesis, SWOT Analysis extraction, Chronology sequencing, and text restructuring—execute 100% offline within your device's memory and Apple Neural Engine.</li>
+        <li><strong>No Cloud Inference:</strong> No prompts, note selections, or generated text are transmitted across the internet to OpenAI, Anthropic, Google, or developer servers.</li>
+        <li><strong>Model Training:</strong> Your content is never collected, stored, or utilized to train or fine-tune artificial intelligence models.</li>
+      </ul>
+
+      <h3>3. Document Scanner &amp; Audio Memos</h3>
+      <ul>
+        <li><strong>Camera &amp; Document Scanner:</strong> Used strictly to capture physical documents, sketches, or receipts directly into a note. Optical Character Recognition (OCR) and text cleaning run entirely on-device using Apple's Vision framework and local neural models.</li>
+        <li><strong>Microphone &amp; Voice Recordings:</strong> Audio recordings are saved in the app's sandboxed storage. Speech recognition operates on-device using Apple's system speech frameworks; no audio data is sent to external speech servers.</li>
+      </ul>
+
+      <h3>4. Permissions (Granted Only on Demand)</h3>
+      <p>The app requests system permissions only when you explicitly invoke a feature:</p>
+      <ul>
+        <li><strong>Camera:</strong> Attach photographs or scan documents into a note.</li>
+        <li><strong>Microphone:</strong> Record voice memos into an audio card.</li>
+        <li><strong>Speech Recognition:</strong> Transcribe recorded audio on-device.</li>
+        <li><strong>Photo Library:</strong> Select and attach images from your Photos library.</li>
+        <li><strong>Contacts (Optional):</strong> If you add a Contact organizer, you may pick a contact to store their name, phone, or email within that specific note.</li>
+        <li><strong>Location (Optional):</strong> If you add a Place organizer, you may select a location to display a map pin.</li>
+      </ul>
+      <p>You can revoke any permission at any time in iOS/iPadOS/macOS System Settings.</p>
+
+      <h3>5. In-App Purchases (StoreKit 2)</h3>
+      <p>In-App Purchases (such as Unlimited Notes, Color Packs, and Organizer Bundles) are processed directly by Apple through StoreKit. We do not receive, store, or process your credit card numbers or billing addresses. Purchase entitlements are cryptographically verified on-device via Apple StoreKit receipts.</p>
+
+      <h3>6. What We Do Not Collect</h3>
+      <ul>
+        <li>We do not use third-party analytics (e.g., Firebase, Google Analytics, Mixpanel, AppsFlyer).</li>
+        <li>We do not use advertising networks (e.g., AdMob, AppLovin).</li>
+        <li>We do not track you across other apps or websites (ATT tracking is not used).</li>
+        <li>We do not collect device identifiers (IDFA, IDFV) for profiling.</li>
+      </ul>
+
+      <h3>7. Children's Privacy</h3>
+      <p>Blueprint Notes is not directed to children under 13, and we do not knowingly collect personal information from children.</p>
+
+      <h3>8. Changes to This Policy</h3>
+      <p>We may periodically update this policy to reflect new app features. Any changes will be posted at this URL with an updated revision date.</p>
+
+      <div class="contact-box">
+        <h4>Developer Contact</h4>
+        <div class="contact-item"><strong>Developer:</strong> Balazs Nagy</div>
+        <div class="contact-item"><strong>Email:</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>Website:</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>Location:</strong> Budapest, Hungary</div>
+      </div>
+    </article>
+
+    <!-- ======================================================== -->
+    <!-- 2. MAGYAR (HUNGARIAN)                                    -->
+    <!-- ======================================================== -->
+    <article id="policy-hu" class="policy-content" lang="hu">
+      <h2 class="policy-heading">Adatvédelmi Irányelvek – Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>Utoljára frissítve:</strong> 2026. november 6.</span>
+        <span>🌐 <strong>Weboldal:</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>Nyelv:</strong> Magyar (Hungarian)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        A Blueprint Notes egy építészeti jegyzet-atelier iOS, iPadOS és macOS rendszerekre. Ez az adatvédelmi nyilatkozat ismerteti, hogyan kezeli az alkalmazás az Ön adatait. Rendszerünk a zéró-ismeretű (zero-knowledge), hardveresen izolált architektúrán alapul: nem üzemeltetünk felhasználói fiókrendszert, és nem rendelkezünk olyan szerverekkel, amelyek olvasnák, tárolnák, továbbítanák vagy monetizálnák az Ön jegyzeteit.
+      </div>
+
+      <h3>1. Mi marad az eszközén és az Ön személyes iCloud fiókjában?</h3>
+      <ul>
+        <li><strong>Helyi tárolás:</strong> A jegyzetek, kézírások, fényképek, hangfelvételek, címkék és rendszerező kártyák kizárólag az Ön eszközén, biztonságos helyi tárhelyen tárolódnak.</li>
+        <li><strong>Apple iCloud (CloudKit) szinkronizáció:</strong> Ha be van jelentkezve Apple ID-jával, a Blueprint Notes az Apple privát CloudKit adatbázisán keresztül szinkronizál. Ezek az adatok az Ön személyes Apple ID fiókjához tartoznak és végpontok közötti titkosítással védettek. A fejlesztő nem férhet hozzá az Ön jegyzeteihez.</li>
+        <li><strong>Megosztott jegyzetek:</strong> Ha kifejezetten megoszt egy jegyzetet az Apple natív megosztási eszközeivel, az adatátvitelt közvetlenül az Apple kezeli. Nem naplózzuk és nem látjuk ezt a cserét.</li>
+      </ul>
+
+      <h3>2. 100%-ban eszközön futó mesterséges intelligencia (On-Device AI)</h3>
+      <p>A beépített helyi mesterséges intelligencia (Qwen 2.5 és Llama 3.2 modellek) kizárólag az Apple Silicon hardveren (Apple Neural Engine és GPU) fut:</p>
+      <ul>
+        <li><strong>Helyi feldolgozás:</strong> Az AI funkciók – beleértve az értekezlet-összefoglalókat (.meeting), a SWOT mátrixokat (.swot), az idővonalakat (.chronology) és a szövegátfogalmazást – 100%-ban offline, az eszköz memóriájában futnak le.</li>
+        <li><strong>Nincs felhőalapú adatküldés:</strong> Egyetlen prompt, kijelölt szöveg vagy generált válasz sem kerül továbbításra külső szerverekre.</li>
+        <li><strong>Nincs modelltanítás:</strong> Az Ön jegyzeteit soha nem gyűjtjük és nem használjuk fel AI modellek tanítására.</li>
+      </ul>
+
+      <h3>3. Dokumentumszkenner és hangfelvételek</h3>
+      <ul>
+        <li><strong>Dokumentumszkenner:</strong> Nyugták és dokumentumok beolvasása az Apple Vision keretrendszerével, teljesen helyben az eszközön történik.</li>
+        <li><strong>Hangfelvételek:</strong> A hangjegyzetek az eszköz védett tárhelyén tárolódnak, a leiratkészítés az Apple natív beszédfelismerőjével helyben zajlik.</li>
+      </ul>
+
+      <h3>4. Rendszerengedélyek (Csak igény szerint)</h3>
+      <p>A kamera, mikrofon, fotótár, névjegyek és helyadatok elérése csak akkor történik meg, ha Ön kifejezetten olyan kártyát hoz létre a jegyzetben. Bármikor visszavonható az iOS / macOS Rendszerbeállításokban.</p>
+
+      <h3>5. Alkalmazáson belüli vásárlások (StoreKit 2)</h3>
+      <p>Minden prémium funkció vásárlása (pl. Korlátlan Jegyzetek, Színcsomagok) az Apple StoreKit 2 rendszerén keresztül fut. Bankkártyaadatokat a fejlesztő nem lát és nem tárol.</p>
+
+      <h3>6. Amit SOHA NEM gyűjtünk</h3>
+      <ul>
+        <li>Nincsenek harmadik féltől származó analitikai SDK-k (pl. Google Analytics, Firebase, Mixpanel).</li>
+        <li>Nincsenek hirdetési hálózatok és reklámok.</li>
+        <li>Nincs alkalmazások közötti nyomkövetés (ATT).</li>
+        <li>Nem gyűjtünk eszközazonosítókat profilozási célból.</li>
+      </ul>
+
+      <h3>7. Kapcsolat</h3>
+      <div class="contact-box">
+        <h4>Fejlesztői Kapcsolat</h4>
+        <div class="contact-item"><strong>Fejlesztő:</strong> Nagy Balázs</div>
+        <div class="contact-item"><strong>Email:</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>Weboldal:</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>Helyszín:</strong> Budapest, Magyarország</div>
+      </div>
+    </article>
+
+    <!-- ======================================================== -->
+    <!-- 3. DEUTSCH (GERMAN)                                      -->
+    <!-- ======================================================== -->
+    <article id="policy-de" class="policy-content" lang="de">
+      <h2 class="policy-heading">Datenschutzerklärung – Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>Zuletzt aktualisiert:</strong> 6. November 2026</span>
+        <span>🌐 <strong>Webseite:</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>Sprache:</strong> Deutsch (German)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        Blueprint Notes ist ein Notizbuch-Atelier für iOS, iPadOS und macOS mit vollständiger Hardware-Isolation und Zero-Knowledge-Architektur. Wir verwalten kein Benutzerkontensystem und betreiben keine Server, die Ihre Notizen lesen, speichern, übertragen oder monetarisieren.
+      </div>
+
+      <h3>1. Lokale Speicherung &amp; Privates iCloud</h3>
+      <ul>
+        <li><strong>Lokale Speicherung:</strong> Ihre Notizen, Skizzen, Sprachmemos und Organizer verbleiben sicher im isolierten Anwendungsspeicher auf Ihrem Gerät.</li>
+        <li><strong>Apple iCloud (CloudKit) Synchronisierung:</strong> Die Synchronisierung erfolgt ausschließlich verschlüsselt über Ihre private Apple iCloud (CloudKit) Datenbank. Wir haben keinerlei Zugriff auf Ihre Notizen oder privaten Schlüssel.</li>
+      </ul>
+
+      <h3>2. 100% Lokale Künstliche Intelligenz (On-Device AI)</h3>
+      <p>Kleine Sprachmodelle (Qwen 2.5, Llama 3.2) laufen vollständig lokal auf der Apple Neural Engine und GPU Ihres Geräts:</p>
+      <ul>
+        <li><strong>Vollständige Offline-Funktionalität:</strong> Meeting-Zusammenfassungen (.meeting), SWOT-Analysen (.swot) und Zeitleisten (.chronology) werden direkt im Arbeitsspeicher berechnet – ganz ohne Internetverbindung.</li>
+        <li><strong>Keine Server-Übertragung:</strong> Ihre Texte, Notizabschnitte und Prompts verlassen niemals Ihr Gerät.</li>
+        <li><strong>Kein KI-Training:</strong> Ihre persönlichen Inhalte werden niemals zum Trainieren oder Verbessern von KI-Modellen verwendet.</li>
+      </ul>
+
+      <h3>3. Dokumentenscanner &amp; Audioaufnahmen</h3>
+      <ul>
+        <li><strong>Dokumentenscanner:</strong> Das Scannen physischer Belege oder Notizen erfolgt lokal über Apples Vision-Framework.</li>
+        <li><strong>Mikrofon &amp; Memos:</strong> Sprachaufnahmen verbleiben auf dem Gerät. Die Spracherkennung läuft offline über native Apple-Sprachframeworks.</li>
+      </ul>
+
+      <h3>4. Keine Drittanbieter-Tracker &amp; Keine Werbung</h3>
+      <ul>
+        <li>Keine Werbenetzwerke oder Werbebanner.</li>
+        <li>Keine Analysetools (wie Firebase, Google Analytics oder Mixpanel).</li>
+        <li>Kein App-übergreifendes Tracking oder Profiling.</li>
+      </ul>
+
+      <h3>5. In-App-Käufe (StoreKit 2)</h3>
+      <p>In-App-Käufe werden direkt über Apple StoreKit abgewickelt. Wir erhalten oder verarbeiten keine Kreditkarten- oder Rechnungsinformationen.</p>
+
+      <div class="contact-box">
+        <h4>Entwicklerkontakt</h4>
+        <div class="contact-item"><strong>Entwickler:</strong> Balazs Nagy</div>
+        <div class="contact-item"><strong>E-Mail:</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>Webseite:</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>Ort:</strong> Budapest, Ungarn</div>
+      </div>
+    </article>
+
+    <!-- ======================================================== -->
+    <!-- 4. FRANÇAIS (FRENCH)                                     -->
+    <!-- ======================================================== -->
+    <article id="policy-fr" class="policy-content" lang="fr">
+      <h2 class="policy-heading">Politique de Confidentialité – Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>Dernière mise à jour :</strong> 6 novembre 2026</span>
+        <span>🌐 <strong>Site web :</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>Langue :</strong> Français (French)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        Blueprint Notes est un atelier de carnets pour iOS, iPadOS et macOS reposant sur une architecture isolée sans connaissances préalables (zero-knowledge). Nous n'utilisons aucun système de compte utilisateur et nous n'exploitons aucun serveur susceptible de lire, stocker ou monétiser vos notes.
+      </div>
+
+      <h3>1. Stockage Local et iCloud Privé</h3>
+      <ul>
+        <li><strong>Stockage Local :</strong> Toutes vos notes, croquis, photos et enregistrements audio sont stockés localement sur votre appareil dans le bac à sable sécurisé de l'application.</li>
+        <li><strong>Synchronisation Apple iCloud (CloudKit) :</strong> La synchronisation s'effectue exclusivement via la base de données privée CloudKit associée à votre compte Apple ID. Les données sont chiffrées par Apple et nous n'y avons aucun accès.</li>
+      </ul>
+
+      <h3>2. Intelligence Artificielle 100% sur l'Appareil</h3>
+      <p>Les modèles de langage légers (Qwen, Llama) s'exécutent entièrement en local sur l'Apple Neural Engine et le GPU Apple Silicon :</p>
+      <ul>
+        <li><strong>Fonctionnement 100% hors-ligne :</strong> Synthèses de réunions (.meeting), matrices SWOT (.swot) et frises chronologiques (.chronology) sans aucune connexion internet.</li>
+        <li><strong>Aucune transmission cloud :</strong> Vos notes et requêtes ne sont jamais envoyées vers des serveurs distants.</li>
+        <li><strong>Pas d'entraînement de modèles :</strong> Vos contenus personnels ne sont jamais utilisés pour entraîner des modèles d'IA.</li>
+      </ul>
+
+      <h3>3. Scanner de Documents et Enregistrements Audio</h3>
+      <ul>
+        <li><strong>Numérisation de Documents :</strong> La capture et la reconnaissance optique de caractères (OCR) s'effectuent entièrement sur l'appareil à l'aide des bibliothèques Apple Vision.</li>
+        <li><strong>Mémos Vocaux :</strong> Les données audio restent enregistrées localement dans l'appareil et la transcription est opérée hors-ligne.</li>
+      </ul>
+
+      <h3>4. Aucun Traqueur Tiers &amp; Zéro Publicité</h3>
+      <ul>
+        <li>Aucune régie publicitaire intégrée.</li>
+        <li>Aucun outil d'analyse tiers (ni Firebase, ni Google Analytics).</li>
+        <li>Aucun traçage entre applications (App Tracking Transparency non requis car zéro tracking).</li>
+      </ul>
+
+      <h3>5. Achats Intégrés (StoreKit 2)</h3>
+      <p>Les achats in-app sont gérés directement par Apple StoreKit. Aucune information financière n'est transmise au développeur.</p>
+
+      <div class="contact-box">
+        <h4>Contact Développeur</h4>
+        <div class="contact-item"><strong>Développeur :</strong> Balazs Nagy</div>
+        <div class="contact-item"><strong>E-mail :</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>Site web :</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>Lieu :</strong> Budapest, Hongrie</div>
+      </div>
+    </article>
+
+    <!-- ======================================================== -->
+    <!-- 5. ESPAÑOL (SPANISH)                                     -->
+    <!-- ======================================================== -->
+    <article id="policy-es" class="policy-content" lang="es">
+      <h2 class="policy-heading">Política de Privacidad – Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>Última actualización :</strong> 6 de noviembre de 2026</span>
+        <span>🌐 <strong>Sitio web :</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>Idioma :</strong> Español (Spanish)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        Blueprint Notes es un cuaderno digital arquitectónico para iOS, iPadOS y macOS diseñado con aislamiento de hardware y cero recopilación de datos. No gestionamos cuentas de usuario ni operamos servidores remotos que almacenen, lean o moneticen tus notas personales.
+      </div>
+
+      <h3>1. Tus Datos en tu Dispositivo y en tu iCloud Privado</h3>
+      <ul>
+        <li><strong>Almacenamiento Local :</strong> Tus notas, bocetos, grabaciones de voz y fichas organizadoras se guardan localmente en el almacenamiento seguro de tu dispositivo.</li>
+        <li><strong>Sincronización con Apple iCloud (CloudKit) :</strong> La sincronización se realiza exclusivamente a través de la base de datos privada de CloudKit de tu cuenta personal de Apple ID. El desarrollador no puede acceder a tu contenido ni a tus claves de cifrado.</li>
+      </ul>
+
+      <h3>2. Inteligencia Artificial 100% en el Dispositivo (On-Device AI)</h3>
+      <p>Los modelos neuronales locales (Qwen, Llama) se ejecutan directamente en el Neural Engine y la GPU de Apple Silicon:</p>
+      <ul>
+        <li><strong>Procesamiento Offline Completo :</strong> Resúmenes de reuniones (.meeting), matrices SWOT (.swot) y líneas temporales (.chronology) procesadas sin conexión a Internet.</li>
+        <li><strong>Cero telemetría en la nube :</strong> Nada se envía a servidores de OpenAI, Google ni a servidores de terceros.</li>
+        <li><strong>Sin entrenamiento de modelos :</strong> Tu información nunca se recopila ni se utiliza para entrenar modelos de IA.</li>
+      </ul>
+
+      <h3>3. Escáner de Documentos y Notas de Voz</h3>
+      <ul>
+        <li><strong>Escáner de Documentos :</strong> El escaneo y reconocimiento de texto (OCR) se procesan íntegramente en el dispositivo con el framework Apple Vision.</li>
+        <li><strong>Notas de Voz :</strong> Las grabaciones de audio se guardan en el sandbox local y la transcripción utiliza el reconocimiento de voz local de Apple.</li>
+      </ul>
+
+      <h3>4. Cero Rastreo y Ausencia de Publicidad</h3>
+      <ul>
+        <li>Sin anuncios ni redes publicitarias.</li>
+        <li>Sin herramientas de telemetría o análisis de terceros (sin Firebase, sin Google Analytics).</li>
+        <li>Sin seguimiento entre aplicaciones ni perfiles de usuario.</li>
+      </ul>
+
+      <h3>5. Compras dentro de la Aplicación (StoreKit 2)</h3>
+      <p>Todas las compras dentro de la app son procesadas directamente por Apple StoreKit. No recopilamos datos bancarios ni de facturación.</p>
+
+      <div class="contact-box">
+        <h4>Contacto del Desarrollador</h4>
+        <div class="contact-item"><strong>Desarrollador :</strong> Balazs Nagy</div>
+        <div class="contact-item"><strong>Correo electrónico :</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>Sitio web :</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>Ubicación :</strong> Budapest, Hungría</div>
+      </div>
+    </article>
+
+    <!-- ======================================================== -->
+    <!-- 6. 日本語 (JAPANESE)                                      -->
+    <!-- ======================================================== -->
+    <article id="policy-ja" class="policy-content" lang="ja">
+      <h2 class="policy-heading">プライバシーポリシー – Blueprint Notes</h2>
+      <div class="policy-meta">
+        <span>📅 <strong>最終更新日:</strong> 2026年11月6日</span>
+        <span>🌐 <strong>ウェブサイト:</strong> <a href="https://bazsonagy.github.io/blueprintnote/" style="color:inherit;">https://bazsonagy.github.io/blueprintnote/</a></span>
+        <span>📍 <strong>言語:</strong> 日本語 (Japanese)</span>
+      </div>
+
+      <div class="lead-paragraph">
+        Blueprint Notesは、iOS、iPadOS、macOS向けの建築製図スタイル手帳・ノートアプリです。本アプリはゼロ知識・ハードウェア分離アーキテクチャを採用しており、ユーザーアカウントの作成を必要とせず、ユーザーのノートを閲覧・取得・収益化するサーバーも一切運用していません。
+      </div>
+
+      <h3>1. 完全な端末内保存およびプライベートiCloud同期</h3>
+      <ul>
+        <li><strong>ローカルストレージ:</strong> ノート、手書きスケッチ、写真、音声メモ、オーガナイザーは端末内のサンドボックス領域に安全に保存されます。</li>
+        <li><strong>Apple iCloud (CloudKit) 同期:</strong> ユーザーの個人用Apple IDに紐づくプライベートCloudKitデータベースを通じてのみ暗号化同期されます。開発者がユーザーのノートデータや暗号化鍵にアクセスすることは不可能です。</li>
+      </ul>
+
+      <h3>2. 100%デバイス完結型のローカルAI（On-Device AI）</h3>
+      <p>搭載されているSLM（Qwen 2.5、Llama 3.2など）は、Apple Silicon（Neural EngineおよびGPU）上で完全にローカル実行されます：</p>
+      <ul>
+        <li><strong>完全オフライン稼働:</strong> 会議議事録（.meeting）、SWOT分析（.swot）、タイムライン（.chronology）の生成が機内モードでも瞬時に完了します。</li>
+        <li><strong>クラウド送信ゼロ:</strong> ノートの内容やプロンプトが外部サーバーに送信されることは一切ありません。</li>
+        <li><strong>AI学習への利用なし:</strong> ユーザーのコンテンツがAIモデルのトレーニングに収集・利用されることはありません。</li>
+      </ul>
+
+      <h3>3. ドキュメントスキャナーと音声メモ</h3>
+      <ul>
+        <li><strong>ドキュメントスキャナー:</strong> レシートや文書の撮影・文字認識（OCR）は、AppleのVisionフレームワークにより完全に端末内で処理されます。</li>
+        <li><strong>音声メモ:</strong> 録音データは端末内に保存され、文字起こしはApple標準の音声認識によりオフラインで実行されます。</li>
+      </ul>
+
+      <h3>4. サードパーティによる追跡・広告の完全排除</h3>
+      <ul>
+        <li>広告ネットワーク（AdMobなど）は一切導入していません。</li>
+        <li>外部アナリティクスツール（Firebase、Google Analyticsなど）は一切組み込まれていません。</li>
+        <li>アプリ間トラッキング（ATT）は行いません。</li>
+      </ul>
+
+      <h3>5. アプリ内課金（StoreKit 2）</h3>
+      <p>アプリ内課金はApple StoreKitを通じて安全に処理されます。開発者がクレジットカード情報や請求先住所を閲覧・保持することはありません。</p>
+
+      <div class="contact-box">
+        <h4>開発者お問い合わせ</h4>
+        <div class="contact-item"><strong>開発者:</strong> Balazs Nagy</div>
+        <div class="contact-item"><strong>メール:</strong> <a href="mailto:bncdgames@gmail.com">bncdgames@gmail.com</a></div>
+        <div class="contact-item"><strong>ウェブサイト:</strong> <a href="https://bazsonagy.github.io/blueprintnote/">https://bazsonagy.github.io/blueprintnote/</a></div>
+        <div class="contact-item"><strong>所在地:</strong> ハンガリー・ブダペスト</div>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 Blueprint Notes · Developed by Balazs Nagy
+      <span class="footer-divider">•</span>
+      <a href="https://bazsonagy.github.io/blueprintnote/">GitHub Repository</a>
+      <span class="footer-divider">•</span>
+      <a href="mailto:bncdgames@gmail.com">Contact</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+  function setLanguage(lang) {
+    const validLangs = ['en', 'hu', 'de', 'fr', 'es', 'ja'];
+    const targetLang = validLangs.includes(lang) ? lang : 'en';
+
+    // Update buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if (btn.getAttribute('data-lang') === targetLang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Update articles
+    document.querySelectorAll('.policy-content').forEach(article => {
+      if (article.id === 'policy-' + targetLang) {
+        article.classList.add('active');
+      } else {
+        article.classList.remove('active');
+      }
+    });
+
+    // Save preference & hash
+    try {
+      localStorage.setItem('blueprint_lang', targetLang);
+      if (history.replaceState) {
+        history.replaceState(null, null, '#' + targetLang);
+      } else {
+        location.hash = targetLang;
+      }
+    } catch (e) {}
+  }
+
+  // Auto-detect on load
+  (function initLanguage() {
+    // 1. URL Hash check (e.g. #hu, #de)
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    const validLangs = ['en', 'hu', 'de', 'fr', 'es', 'ja'];
+    if (validLangs.includes(hash)) {
+      setLanguage(hash);
+      return;
+    }
+
+    // 2. LocalStorage check
+    try {
+      const saved = localStorage.getItem('blueprint_lang');
+      if (validLangs.includes(saved)) {
+        setLanguage(saved);
+        return;
+      }
+    } catch (e) {}
+
+    // 3. Browser language
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+    if (validLangs.includes(browserLang)) {
+      setLanguage(browserLang);
+      return;
+    }
+
+    // Default to en
+    setLanguage('en');
+  })();
+</script>
+
+</body>
+</html>
